@@ -20,6 +20,8 @@ const Home = () => {
     return <div>Loading...</div>;
   } 
 
+  MOre stuff
+
   else {
     return (
       <div>
