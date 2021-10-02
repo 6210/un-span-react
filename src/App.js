@@ -26,11 +26,13 @@ function App() {
         
         <Switch>
           <Route exact path="/">
+            Test
             <Home />
           </Route>
 
           <Route exact path="/topics">
             <Topics />
+            TEst
           </Route>
         </Switch>
 
