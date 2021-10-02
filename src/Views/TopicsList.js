@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-export const Topics = () => {
-    const { slug } = useParams()
-    const url = `https://api.unsplash.com/topics/wallpapers/?client_id=0OoqqYn5_RvvT6fPY_NQjmQQiMyt_JbGOPP_SCU-MsY`
+export const TopicsList = () => {
+    
+    const url = 'https://api.unsplash.com/topics?client_id=0OoqqYn5_RvvT6fPY_NQjmQQiMyt_JbGOPP_SCU-MsY'
     const [topics, setTopics] = useState(null)
 
     let content = null
@@ -19,19 +19,20 @@ export const Topics = () => {
     if(topics){
         content =
         topics.map((topics, key) =>
-            <div>
-                <h1>{topics.title}</h1>
+            <div key={topics.id}>
+                <h3>{topics.title}</h3>
+                <div>{topics.slug}</div>
             </div>
         )
     };
 
-
     return (
         <div>
-        <h3>List Images in a topic</h3>
-        {content}
-    </div>
+            <h1>HELLO ####</h1>
+            <h3>List Images in a topic</h3>
+            {content}
+        </div>
     )
 }
-Í
-export default Topics
+
+export default TopicsList

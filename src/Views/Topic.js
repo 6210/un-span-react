@@ -1,46 +1,37 @@
-import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import { createApi } from "unsplash-js"
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
-const api = createApi({
-  accessKey: "0OoqqYn5_RvvT6fPY_NQjmQQiMyt_JbGOPP_SCU-MsY"
-});
+export const Topics = () => {
 
-const UnsplashApi = ({ topicId }) => {
+    const url = 'https://api.unsplash.com/topics/wallpapers/photos?client_id=0OoqqYn5_RvvT6fPY_NQjmQQiMyt_JbGOPP_SCU-MsY'
+    const [topic, setTopic] = useState(null)
 
- const [data, setTopicsResponse] = useState(null);
+    let content = null
 
-  useEffect(() => {
-    api.topics.list({ perPage: "5", orderBy: "featured" })
-    .then((topics) => { console.log(topics); setTopicsResponse(topics) })
-  }, []);
-  
-  if (data === null) {
-    return <div>Loading...</div>;
-  } 
+    useEffect(() => {
+        axios.get(url)
+            .then(response => {
+                setTopic(response.data)
+            })
+    }, [url])
 
-  else {
-    return (
-      <div>
-          <h4>/ TOPICS</h4>
-          {data.response.results.map((topics) => (
-            <div key={topics.id}>
-                <h2 className="uk-h2 topic-title">{topics.title}</h2>
-                <div key={topics.cover_photo.id}>
-                  <img src={topics.cover_photo.urls.small} alt={topics.cover_photo.alt_description}/>
-                </div>
-                <div>{topics.description.substring(0, 90)}...</div>
-                <div>{topics.total_photos}</div>
-                <div>Slug: {topics.slug}</div>
-                <div>ID: {topics.id}</div>
-                <a className="photo-count" href={topics.links.html} target={'blank'}>
-                  Link
-                </a>
+    if(topic){
+        content =
+        topic.map((topic, key) =>
+            <div key={topic.id}>
+                <div>{topic.id}</div>
+                <img src={topic.urls.thumb} alt={topic.urls.description} />
             </div>
-          ))}
-      </div>
-    );
- }
+        )
+    };
+
+    return (
+        <div>
+            <h3>List Images in a topic</h3>
+            {content}
+        </div>
+    )
 }
 
-export default UnsplashApi
+export default Topics

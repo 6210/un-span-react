@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from "react-router"
+import { useParams } from 'react-router-dom'
 
-export const Topics = () => {
+export const TopicImageList = () => {
 
-    const { slug } = useParams()
-    // const url = 'https://api.unsplash.com/topics/wallpapers/photos?client_id=0OoqqYn5_RvvT6fPY_NQjmQQiMyt_JbGOPP_SCU-MsY'
-    const url = `https://api.unsplash.com/topics/${slug}/photos?client_id=0OoqqYn5_RvvT6fPY_NQjmQQiMyt_JbGOPP_SCU-MsY`
+    const url = 'https://api.unsplash.com/topics/wallpapers/photos?client_id=0OoqqYn5_RvvT6fPY_NQjmQQiMyt_JbGOPP_SCU-MsY'
     const [topic, setTopic] = useState(null)
 
-    console.log(slug);
     let content = null
 
     useEffect(() => {
@@ -37,4 +34,4 @@ export const Topics = () => {
     )
 }
 
-export default Topics
+export default TopicImageList
